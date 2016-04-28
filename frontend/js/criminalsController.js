@@ -5,7 +5,7 @@ CriminalsController.$inject = ['$http'];
 
 function CriminalsController($http){
   var self = this;
-  self.all = [];
+  self.props = [];  // our collection of criminals
   self.addCriminal = addCriminal;
   self.newCriminal = {};
   self.getCriminals = getCriminals;
@@ -13,29 +13,17 @@ function CriminalsController($http){
 
   getCriminals();
   function getCriminals(){
-    $http
-      .get('http://localhost:3000/criminals')
-      .then(function(response){
-        self.all = response.data.criminals;
-    });
+    //1. $http get then...
   }
 
   function addCriminal(){
-    $http
-      .post('http://localhost:3000/criminals', self.newCriminal)
-      .then(function(response){
-        getCriminals();
-    });
-    self.newCriminal = {};
+    //2. $http post then...
   }
 
   function deleteCriminal(criminal){
-    $http
-      .delete("http://localhost:3000/criminals/" + criminal._id)
-      .then(function(response){
-        var index = self.all.indexOf(criminal);
-        self.all.splice(index, 1);
-      });
+    //BONUS: $http delete then...
+    //you'll need to access an object's ._id for this
+    //or object['_id'] for MongoDB (unlike traditional SQL)
   }
 
 }
